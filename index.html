@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cv.arya</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="logo">
+            <img
+              src="assets/logo-arya-pramana.png"
+              alt="Logo CV Arya Pramana Trucking"
+            />
+          </div>
+          <div>
+            <b>Arya Pramana</b>
+            <small>Trade · Shipping · Trucking</small>
+          </div>
+        </div>
+
+        <nav>
+          <button class="nav active" data-page="dashboard">
+            ⌂ <span>Dashboard</span>
+          </button>
+          <button class="nav" data-page="orders">
+            ▣ <span>Order Customer</span>
+          </button>
+          <button class="nav" data-page="kopra">
+            ◈ <span>Transaksi Kopra</span>
+          </button>
+          <button class="nav" data-page="shipping">
+            ⚓ <span>Shipping & Kapal</span>
+          </button>
+          <button class="nav" data-page="documents">
+            ▤ <span>BL & DO</span>
+          </button>
+          <button class="nav" data-page="ports">
+            ⌖ <span>Pelabuhan</span>
+          </button>
+          <button class="nav" data-page="trucking">
+            🚚 <span>Trucking</span>
+          </button>
+          <button class="nav" data-page="customers">
+            ♙ <span>Customer / Pabrik</span>
+          </button>
+          <button class="nav" data-page="finance">
+            Rp <span>Keuangan</span>
+          </button>
+          <button class="nav" data-page="reports">
+            ▥ <span>Laporan</span>
+          </button>
+        </nav>
+
+        <div class="side-bottom">
+          <div class="online"><i></i> Sistem Online</div>
+          <div class="user-mini">
+            <div class="avatar">AS</div>
+            <div>
+              <b>Owner</b>
+              <small>Administrator</small>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <button id="mobileMenu" class="mobile-menu">☰</button>
+            <span class="crumb">Integrated Commodity Logistics</span>
+            <h1 id="pageTitle">Dashboard</h1>
+          </div>
+          <div class="top-actions">
+            <button class="icon-btn">⌕</button>
+            <button class="icon-btn">🔔<em>4</em></button>
+            <div class="avatar">AS</div>
+          </div>
+        </header>
+
+        <!-- Page: Dashboard -->
+        <section id="dashboard" class="page active-page">
+          <div class="hero">
+            <div>
+              <span class="eyebrow">END-TO-END LOGISTICS</span>
+              <h2>Kopra dari supplier sampai pabrik.</h2>
+              <p>Selamat datang.</p>
+            </div>
+            <button class="primary" onclick="openModal('orderModal')">
+              ＋ Buat Order
+            </button>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <span>Order Aktif</span>
+              <strong>18</strong>
+              <b class="blue-t">7 antar-pulau</b>
+            </div>
+            <div class="stat">
+              <span>Container Berjalan</span>
+              <strong>26</strong>
+              <b class="blue-t">3 kapal aktif</b>
+            </div>
+            <div class="stat">
+              <span>Pengiriman Trucking</span>
+              <strong>14</strong>
+              <b class="up">9 dalam perjalanan</b>
+            </div>
+            <div class="stat">
+              <span>Piutang</span>
+              <strong>Rp 184,2 jt</strong>
+              <b class="down">6 invoice</b>
+            </div>
+          </div>
+
+          <div class="flow card">
+            <div class="card-head">
+              <div>
+                <h3>Alur Order Antar-Pulau</h3>
+                <p>Contoh: supplier → kapal → pelabuhan → pabrik</p>
+              </div>
+            </div>
+            <div class="timeline">
+              <div><i>1</i><b>Supplier</b><small>Kopra siap</small></div>
+              <div class="line"></div>
+              <div><i>2</i><b>Stuffing</b><small>Container</small></div>
+              <div class="line"></div>
+              <div><i>3</i><b>Shipping</b><small>Kapal</small></div>
+              <div class="line"></div>
+              <div><i>4</i><b>Port</b><small>BL & DO</small></div>
+              <div class="line"></div>
+              <div><i>5</i><b>Trucking</b><small>Ke pabrik</small></div>
+              <div class="line"></div>
+              <div><i>6</i><b>Factory</b><small>PT tujuan</small></div>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-head">
+                <div>
+                  <h3>Shipment Aktif</h3>
+                  <p>Monitoring container</p>
+                </div>
+                <button class="text-btn" data-page="shipping">
+                  Lihat semua →
+                </button>
+              </div>
+              <div id="shipmentList" class="list"></div>
+            </div>
+            <div class="card">
+              <div class="card-head">
+                <div>
+                  <h3>Dokumen Penting</h3>
+                  <p>BL / DO / surat jalan</p>
+                </div>
+                <button class="text-btn" data-page="documents">Kelola →</button>
+              </div>
+              <div id="docList" class="list"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Page: Orders -->
+        <section id="orders" class="page">
+          <div class="section-head">
+            <div>
+              <h2>Order Customer</h2>
+              <p>
+                Customer dapat meminta pengiriman antar-pulau atau domestik.
+              </p>
+            </div>
+            <button class="primary" onclick="openModal('orderModal')">
+              ＋ Order Baru
+            </button>
+          </div>
+          <div class="toolbar">
+            <input
+              id="orderSearch"
+              placeholder="Cari order, customer, PT tujuan, BL..."
+            />
+          </div>
+          <div class="card table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Order</th>
+                  <th>Customer</th>
+                  <th>Asal</th>
+                  <th>Moda</th>
+                  <th>PT Tujuan</th>
+                  <th>Container</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Page: Kopra -->
+        <section id="kopra" class="page">
+          <div class="section-head">
+            <div>
+              <h2>Transaksi Kopra</h2>
+              <p>Hubungkan transaksi komoditas dengan order dan pengiriman.</p>
+            </div>
+            <button class="primary" onclick="openModal('kopraModal')">
+              ＋ Transaksi
+            </button>
+          </div>
+          <div class="stats compact">
+            <div class="stat">
+              <span>Volume Bulan Ini</span><strong>486,4 ton</strong>
+            </div>
+            <div class="stat">
+              <span>Nilai Pembelian</span><strong>Rp 3,31 M</strong>
+            </div>
+            <div class="stat">
+              <span>Nilai Penjualan</span><strong>Rp 3,49 M</strong>
+            </div>
+            <div class="stat">
+              <span>Margin</span><strong>Rp 176,6 jt</strong>
+            </div>
+          </div>
+          <div class="card table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Supplier</th>
+                  <th>Buyer / PT</th>
+                  <th>Tonase</th>
+                  <th>Harga Beli</th>
+                  <th>Harga Jual</th>
+                  <th>Margin</th>
+                </tr>
+              </thead>
+              <tbody id="kopraTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Page: Shipping -->
+        <section id="shipping" class="page">
+          <div class="section-head">
+            <div>
+              <h2>Shipping & Kapal</h2>
+              <p>
+                Kelola perusahaan maritim, voyage, BL, container, dan status
+                kapal.
+              </p>
+            </div>
+            <button class="primary" onclick="openModal('shipModal')">
+              ＋ Booking Kapal
+            </button>
+          </div>
+          <div class="ship-grid" id="shipGrid"></div>
+        </section>
+
+        <!-- Page: Documents -->
+        <section id="documents" class="page">
+          <div class="section-head">
+            <div>
+              <h2>BL & Delivery Order</h2>
+              <p>Dokumen untuk pengambilan / release container di pelabuhan.</p>
+            </div>
+            <button class="primary" onclick="openModal('docModal')">
+              ＋ Dokumen
+            </button>
+          </div>
+          <div class="notice">
+            ⚠️ <b>Kontrol dokumen:</b> container tidak boleh dijadwalkan keluar
+            pelabuhan sebelum status dokumen yang diperlukan dinyatakan valid.
+          </div>
+          <div class="card table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Dokumen</th>
+                  <th>Order</th>
+                  <th>Container</th>
+                  <th>Pelabuhan</th>
+                  <th>PT Tujuan</th>
+                  <th>Release</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="docTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Page: Ports -->
+        <section id="ports" class="page">
+          <div class="section-head">
+            <div>
+              <h2>Pelabuhan</h2>
+              <p>Monitoring port asal, port tujuan, gate, dan container.</p>
+            </div>
+            <button class="primary" onclick="openModal('portModal')">
+              ＋ Tambah Port Call
+            </button>
+          </div>
+          <div class="port-grid" id="portGrid"></div>
+        </section>
+
+        <!-- Page: Trucking -->
+        <section id="trucking" class="page">
+          <div class="section-head">
+            <div>
+              <h2>Trucking</h2>
+              <p>
+                Pengambilan container dari pelabuhan dan delivery ke PT tujuan.
+              </p>
+            </div>
+            <button class="primary" onclick="openModal('truckModal')">
+              ＋ Tugaskan Truk
+            </button>
+          </div>
+          <div class="truck-grid" id="truckGrid"></div>
+        </section>
+
+        <!-- Page: Customers -->
+        <section id="customers" class="page">
+          <div class="section-head">
+            <div>
+              <h2>Customer / Pabrik</h2>
+              <p>
+                Tujuan order berupa perusahaan/pabrik, bukan sekadar nama kota.
+              </p>
+            </div>
+            <button class="primary" onclick="openModal('customerModal')">
+              ＋ Tambah Perusahaan
+            </button>
+          </div>
+          <div class="customer-grid" id="customerGrid"></div>
+        </section>
+
+        <!-- Page: Finance -->
+        <section id="finance" class="page">
+          <div class="section-head">
+            <div>
+              <h2>Keuangan</h2>
+              <p>
+                Satukan margin kopra, freight, trucking, dan biaya pelabuhan.
+              </p>
+            </div>
+            <button class="primary">＋ Catat Biaya</button>
+          </div>
+          <div class="stats compact">
+            <div class="stat">
+              <span>Revenue</span><strong>Rp 3,82 M</strong>
+            </div>
+            <div class="stat">
+              <span>Biaya Logistik</span><strong>Rp 426,8 jt</strong>
+            </div>
+            <div class="stat">
+              <span>Piutang</span><strong>Rp 184,2 jt</strong>
+            </div>
+            <div class="stat">
+              <span>Estimasi Laba</span><strong>Rp 211,4 jt</strong>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h3>Komponen Biaya Shipment</h3>
+                <p>Contoh shipment ORD-0268</p>
+              </div>
+            </div>
+            <div class="finance-list">
+              <div>
+                <span>Freight kapal</span><b class="expense">− Rp 18.500.000</b>
+              </div>
+              <div>
+                <span>THC / port handling</span
+                ><b class="expense">− Rp 4.250.000</b>
+              </div>
+              <div>
+                <span>DO / document fee</span
+                ><b class="expense">− Rp 850.000</b>
+              </div>
+              <div>
+                <span>Trucking port → PT</span
+                ><b class="expense">− Rp 3.400.000</b>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Page: Reports -->
+        <section id="reports" class="page">
+          <div class="section-head">
+            <div>
+              <h2>Laporan</h2>
+              <p>Profit per order, customer, kapal, route, dan trucking.</p>
+            </div>
+            <button
+              class="primary"
+              onclick="alert('Demo: versi produksi dapat export PDF/Excel.')"
+            >
+              ⇩ Export
+            </button>
+          </div>
+          <div class="card report">
+            <h3>Volume Shipment Bulanan (ton)</h3>
+            <div class="bars">
+              <i style="height: 44%"><span>Apr</span></i>
+              <i style="height: 56%"><span>Mei</span></i>
+              <i style="height: 63%"><span>Jun</span></i>
+              <i style="height: 72%"><span>Jul</span></i>
+              <i style="height: 68%"><span>Agu</span></i>
+              <i style="height: 91%"><span>Sep</span></i>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal-wrap" id="orderModal">
+      <div class="modal">
+        <button class="close" onclick="closeModal('orderModal')">×</button>
+        <h2>Buat Order Customer</h2>
+        <p class="muted">Tujuan ditulis sebagai perusahaan/pabrik.</p>
+        <form id="orderForm">
+          <label>
+            Customer
+            <input
+              name="customer"
+              required
+              placeholder="PT / perusahaan customer"
+            />
+          </label>
+          <div class="two">
+            <label>
+              Asal / Supplier
+              <input name="origin" required placeholder="Contoh: Bitung" />
+            </label>
+            <label>
+              PT Tujuan
+              <input
+                name="factory"
+                required
+                placeholder="Contoh: PT Sari Mas Permai"
+              />
+            </label>
+          </div>
+          <div class="two">
+            <label>
+              Container
+              <input name="container" placeholder="20FT / 40FT" />
+            </label>
+          </div>
+          <label>
+            Muatan & tonase
+            <input name="cargo" required placeholder="Kopra — 10 ton" />
+          </label>
+          <button class="primary full">Simpan Order</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-wrap" id="kopraModal">
+      <div class="modal">
+        <button class="close" onclick="closeModal('kopraModal')">×</button>
+        <h2>Transaksi Kopra</h2>
+        <form id="kopraForm">
+          <div class="two">
+            <label>Supplier<input name="supplier" required /></label>
+            <label>PT Buyer<input name="buyer" required /></label>
+          </div>
+          <div class="two">
+            <label>Tonase<input name="ton" type="number" required /></label>
+            <label
+              >Harga Beli/kg<input name="buy" type="number" required
+            /></label>
+          </div>
+          <label
+            >Harga Jual/kg<input name="sell" type="number" required
+          /></label>
+          <button class="primary full">Simpan</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-wrap" id="shipModal">
+      <div class="modal">
+        <button class="close" onclick="closeModal('shipModal')">×</button>
+        <h2>Booking Kapal</h2>
+        <form id="shipForm">
+          <label>
+            Perusahaan Maritim
+            <input
+              name="maritime"
+              required
+              placeholder="Nama perusahaan pelayaran"
+            />
+          </label>
+          <div class="two">
+            <label>Vessel / Kapal<input name="vessel" required /></label>
+            <label
+              >Voyage<input name="voyage" required placeholder="001E"
+            /></label>
+          </div>
+          <div class="pt tujuan">
+            <label>Port Asal<input name="origin" required /></label>
+          </div>
+          <label>
+  Jumlah Container
+  <select
+    name="jumlah_container"
+    id="jumlahContainer"
+    required
+  >
+    <option value="">Pilih jumlah</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
+</label>
+
+<h3>Data Container</h3>
+
+<div id="containerList" class="container-list">
+  <p>Pilih jumlah container terlebih dahulu.</p>
+</div>
+          </label>
+          <button class="primary full">Simpan Booking</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-wrap" id="docModal">
+      <div class="modal">
+        <button class="close" onclick="closeModal('docModal')">×</button>
+        <h2>BL / DO</h2>
+        <form id="docForm">
+          <div class="two">
+            <label>
+              Jenis
+              <select name="type">
+                <option>Bill of Lading (BL)</option>
+                <option>Delivery Order (DO)</option>
+              </select>
+            </label>
+            <label>
+              No. Dokumen
+              <input name="no" required placeholder="BL-2026-001" />
+            </label>
+          </div>
+          <div class="two">
+            <label>Container<input name="container" required /></label>
+            <label>Pelabuhan<input name="port" required /></label>
+          </div>
+          <label>
+            PT Tujuan
+            <input name="factory" required placeholder="PT Sari Mas Permai" />
+          </label>
+          <button class="primary full">Simpan Dokumen</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-wrap" id="portModal">
+      <div class="modal">
+        <button class="close" onclick="closeModal('portModal')">×</button>
+        <h2>Port Call / Container</h2>
+        <form id="portForm">
+          <div class="two">
+            <label>Pelabuhan<input name="port" required /></label>
+            <label>Container<input name="container" required /></label>
+          </div>
+          <label>
+            Status
+            <select name="status">
+              <option>Menunggu DO</option>
+              <option>Ready for Pickup</option>
+              <option>Gate Out</option>
+              <option>Gate In</option>
+            </select>
+          </label>
+          <button class="primary full">Simpan</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-wrap" id="truckModal">
+      <div class="modal">
+        <button class="close" onclick="closeModal('truckModal')">×</button>
+        <h2>Tugaskan Trucking</h2>
+        <form id="truckForm">
+          <div class="two">
+            <label>No. Polisi<input name="plate" required /></label>
+            <label>Container<input name="container" required /></label>
+          </div>
+          <div class="two">
+            <label>Driver<input name="driver" required /></label>
+            <label>PT Tujuan<input name="factory" required /></label>
+          </div>
+          <label>
+            Pickup
+            <input
+              name="pickup"
+              required
+              placeholder="Pelabuhan Tanjung Perak"
+            />
+          </label>
+          <button class="primary full">Tugaskan</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-wrap" id="customerModal">
+      <div class="modal">
+        <button class="close" onclick="closeModal('customerModal')">×</button>
+        <h2>Tambah Perusahaan</h2>
+        <form id="customerForm">
+          <label>Nama PT / Perusahaan<input name="name" required /></label>
+          <div class="two">
+            <label>PIC<input name="pic" required /></label>
+            <label>
+              Jenis
+              <select name="type">
+                <option>Customer / Pabrik</option>
+                <option>Supplier</option>
+                <option>Perusahaan Maritim</option>
+              </select>
+            </label>
+          </div>
+          <label>Alamat<input name="address" required /></label>
+          <button class="primary full">Simpan</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
